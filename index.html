@@ -3,71 +3,260 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>沁隱軟裝空間設計｜丈量表單</title>
-<script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+<title>沁隱軟裝空間設計｜丈量預約</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: sans-serif; background: #f9f6f2; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
-  .card { background: white; border-radius: 16px; padding: 40px 28px; text-align: center; max-width: 340px; width: 90%; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-  .logo { width: 56px; height: 56px; background: #5c4a3a; border-radius: 14px; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; }
-  .logo svg { width: 30px; height: 30px; fill: white; }
-  h1 { color: #5c4a3a; font-size: 18px; margin-bottom: 8px; }
-  p { color: #888; font-size: 13px; line-height: 1.6; margin-bottom: 20px; }
-  .spinner { width: 36px; height: 36px; border: 3px solid #e0d6cc; border-top-color: #5c4a3a; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 16px; }
-  @keyframes spin { to { transform: rotate(360deg); } }
-  .status { font-size: 13px; color: #aaa; }
-  .btn { display: block; width: 100%; padding: 14px; background: #5c4a3a; color: white; border: none; border-radius: 12px; font-size: 15px; font-weight: bold; cursor: pointer; text-decoration: none; margin-top: 16px; }
+
+  body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background: #f5f0eb;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  .card {
+    background: white;
+    border-radius: 24px;
+    padding: 40px 32px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+  }
+
+  .logo-wrap {
+    margin-bottom: 24px;
+  }
+
+  .logo {
+    width: 72px;
+    height: 72px;
+    background: #5c4a3a;
+    border-radius: 20px;
+    margin: 0 auto 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo svg {
+    width: 36px;
+    height: 36px;
+    fill: white;
+  }
+
+  .brand {
+    font-size: 20px;
+    font-weight: 700;
+    color: #3a2e26;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+  }
+
+  .tagline {
+    font-size: 13px;
+    color: #9e8e80;
+    letter-spacing: 1px;
+  }
+
+  .divider {
+    width: 40px;
+    height: 2px;
+    background: #e8ddd5;
+    margin: 24px auto;
+    border-radius: 2px;
+  }
+
+  .title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #3a2e26;
+    margin-bottom: 8px;
+  }
+
+  .desc {
+    font-size: 13px;
+    color: #9e8e80;
+    line-height: 1.8;
+    margin-bottom: 28px;
+  }
+
+  .btn-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 16px;
+    background: #06C755;
+    color: white;
+    border: none;
+    border-radius: 14px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    margin-bottom: 12px;
+    transition: opacity 0.2s;
+  }
+
+  .btn-line:active { opacity: 0.85; }
+
+  .btn-line svg {
+    width: 22px;
+    height: 22px;
+    fill: white;
+  }
+
+  .btn-secondary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 16px;
+    background: white;
+    color: #5c4a3a;
+    border: 1.5px solid #d4c4b8;
+    border-radius: 14px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .btn-secondary:active { background: #f5f0eb; }
+
+  .hint {
+    font-size: 12px;
+    color: #c0b0a4;
+    margin-top: 20px;
+    line-height: 1.6;
+  }
+
+  .steps {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 28px;
+  }
+
+  .step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    flex: 1;
+  }
+
+  .step-icon {
+    width: 40px;
+    height: 40px;
+    background: #f5f0eb;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+
+  .step-text {
+    font-size: 11px;
+    color: #9e8e80;
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  .step-arrow {
+    color: #d4c4b8;
+    font-size: 16px;
+    padding-top: 12px;
+  }
+
+  #status {
+    font-size: 12px;
+    color: #c0b0a4;
+    margin-top: 8px;
+    min-height: 18px;
+  }
 </style>
 </head>
 <body>
+
 <div class="card">
-  <div class="logo">
-    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+  <div class="logo-wrap">
+    <div class="logo">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+    </div>
+    <div class="brand">沁隱軟裝空間設計</div>
+    <div class="tagline">CHINN INTERIOR DESIGN</div>
   </div>
-  <h1>沁隱軟裝空間設計</h1>
-  <p>正在為您開啟丈量需求表單</p>
-  <div class="spinner" id="spinner"></div>
-  <div class="status" id="status">讀取中...</div>
-  <a class="btn" id="manual-btn" style="display:none" href="#">手動開啟表單</a>
+
+  <div class="divider"></div>
+
+  <div class="title">預約免費丈量服務</div>
+  <div class="desc">填寫需求表單，設計師將親自到府丈量<br>並提供初步設計建議與估價方向</div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-icon">💬</div>
+      <div class="step-text">加入<br>官方帳號</div>
+    </div>
+    <div class="step-arrow">›</div>
+    <div class="step">
+      <div class="step-icon">📋</div>
+      <div class="step-text">填寫<br>需求表單</div>
+    </div>
+    <div class="step-arrow">›</div>
+    <div class="step">
+      <div class="step-icon">🏠</div>
+      <div class="step-text">設計師<br>到府丈量</div>
+    </div>
+  </div>
+
+  <a id="btn-main" class="btn-line" href="https://liff.line.me/2009845899-8rQXLHR7">
+    <svg viewBox="0 0 24 24"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+    開啟 LINE 填寫表單
+  </a>
+
+  <a id="btn-add" class="btn-secondary" href="https://line.me/ti/p/@426ecavp">
+    加入 LINE 官方帳號
+  </a>
+
+  <div id="status"></div>
+
+  <div class="hint">點擊上方按鈕，將跳轉至 LINE 填寫<br>丈量需求表單，全程免費</div>
 </div>
+
 <script>
-const LIFF_ID = "2009845899-8rQXLHR7";
-const FORM_BASE = "https://docs.google.com/forms/d/e/1FAIpQLSc_gztTlaJ4HbCh-k2eOszoF0hBMkSfwX3pKKknw0YdIh6CIQ/viewform";
-const ENTRY_USERID = "entry.1780545459";
+const LIFF = "https://liff.line.me/2009845899-8rQXLHR7";
+const ADD_FRIEND = "https://line.me/ti/p/@426ecavp";
+const ua = navigator.userAgent.toLowerCase();
+const isLine = ua.includes("line");
+const isMobile = /android|iphone|ipad/.test(ua);
 
-function goToForm(userId) {
-  const url = userId ? FORM_BASE + "?usp=pp_url&" + ENTRY_USERID + "=" + encodeURIComponent(userId) : FORM_BASE;
-  document.getElementById("status").textContent = "開啟表單中...";
-  document.getElementById("spinner").style.display = "none";
-  const btn = document.getElementById("manual-btn");
-  btn.href = url;
-  btn.textContent = "點此開啟表單";
-  btn.style.display = "block";
-  setTimeout(function() { window.location.href = url; }, 500);
-}
+const btnMain = document.getElementById("btn-main");
+const btnAdd = document.getElementById("btn-add");
+const status = document.getElementById("status");
 
-async function init() {
-  try {
-    document.getElementById("status").textContent = "連線 LINE 中...";
-    await liff.init({ liffId: LIFF_ID });
-    if (!liff.isInClient() && !liff.isLoggedIn()) {
-      document.getElementById("status").textContent = "請先登入 LINE...";
-      liff.login();
-      return;
-    }
-    document.getElementById("status").textContent = "取得帳號資訊中...";
-    const profile = await liff.getProfile();
-    goToForm(profile.userId);
-  } catch (err) {
-    document.getElementById("spinner").style.display = "none";
-    document.getElementById("status").textContent = "請在 LINE 中開啟";
-    const btn = document.getElementById("manual-btn");
-    btn.href = FORM_BASE;
-    btn.textContent = "直接開啟表單";
-    btn.style.display = "block";
-  }
+if (isLine) {
+  // 在 LINE 裡直接跳表單
+  window.location.href = LIFF;
+} else if (isMobile) {
+  // 手機瀏覽器
+  btnMain.href = LIFF;
+  status.textContent = "點擊後會跳轉至 LINE App";
+} else {
+  // 電腦
+  btnMain.textContent = "掃描 QR Code 或加入好友";
+  btnMain.href = ADD_FRIEND;
+  status.textContent = "建議使用手機 LINE 掃描開啟";
 }
-init();
 </script>
 </body>
 </html>
